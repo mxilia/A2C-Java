@@ -13,12 +13,14 @@ public class GamePanel extends JPanel implements Runnable {
     Thread gameThread;
     KeyRegister kr = new KeyRegister();
     Environment env = new Environment(kr);
+    MouseClickRegister clickRegister = new MouseClickRegister(this);
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(width, height));
         this.setBackground(Color.darkGray);
         this.setDoubleBuffered(true);
         this.addKeyListener(kr);
+        this.addMouseListener(clickRegister);
         this.setFocusable(true);
     }
 

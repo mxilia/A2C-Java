@@ -1,9 +1,9 @@
 package environment;
 
 public class Point {
-    public int x,y;
+    public double x,y;
 
-    public Point(int x, int y){
+    public Point(double x, double y){
         this.x = x;
         this.y = y;
     }
