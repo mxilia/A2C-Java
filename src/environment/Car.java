@@ -12,7 +12,7 @@ public class Car {
     double ox = 90, oy = 180;
     double x = ox, y = oy;
     double width = 20, height = 35;
-    double acceleration = 0.7, friction = 0.1, omega = 4;
+    double acceleration = 0.5, friction = 0.1, omega = 6;
     double maxSpeed = 14, speed = 0, angle = 0;
     Line leftLine, rightLine, topLine, bottomLine;
 
