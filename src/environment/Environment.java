@@ -28,14 +28,11 @@ public class Environment {
     }
 
     private boolean collideBorder() {
-        // Fix intersect function
         for(Line line:lineBorder){
             Point intersectLeft = findIntersect(line, plr.leftLine);
             Point intersectRight = findIntersect(line, plr.rightLine);
             Point intersectTop = findIntersect(line, plr.topLine);
             Point intersectBottom = findIntersect(line, plr.bottomLine);
-            if(intersectLeft!=null) System.out.println(intersectLeft.x + " "  + intersectLeft.y);
-            else System.out.println("null");
             if(intersectLeft!=null && line.checkBound(intersectLeft) && plr.leftLine.checkBound(intersectLeft)) return true;
             if(intersectRight!=null && line.checkBound(intersectRight) && plr.rightLine.checkBound(intersectRight)) return true;
             if(intersectTop!=null && line.checkBound(intersectTop) && plr.topLine.checkBound(intersectTop)) return true;
@@ -47,6 +44,7 @@ public class Environment {
     public void update() {
         plr.update();
         if(collideBorder()) {
+            System.out.println("Collided");
             plr.reset();
         }
     }
@@ -54,6 +52,16 @@ public class Environment {
     public void draw(Graphics2D g2) {
         g2.drawImage(bg, 0, 0, bg.getWidth(), bg.getHeight(), null);
         for(Line line:lineBorder) line.draw(g2);
+        for(Line line:lineBorder){
+            Point intersectLeft = findIntersect(line, plr.leftLine);
+            Point intersectRight = findIntersect(line, plr.rightLine);
+            Point intersectTop = findIntersect(line, plr.topLine);
+            Point intersectBottom = findIntersect(line, plr.bottomLine);
+            if(intersectLeft!=null) intersectLeft.draw(g2);
+            if(intersectRight!=null) intersectRight.draw(g2);
+            if(intersectTop!=null) intersectTop.draw(g2);
+            if(intersectBottom!=null) intersectBottom.draw(g2);
+        }
         plr.draw(g2);
     }
 }

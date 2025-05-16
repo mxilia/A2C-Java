@@ -65,6 +65,7 @@ public class Car {
         x = ox;
         y = oy;
         angle = 0;
+        speed = 0;
     }
 
     public void draw(Graphics2D g2) {

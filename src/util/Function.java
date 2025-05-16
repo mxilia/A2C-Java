@@ -23,9 +23,19 @@ public class Function {
 
     public static Point findIntersect(Line a, Line b) {
         if(a.slope == b.slope) return null;
-        double divisor = -b.slope+a.slope;
-        double newX = (-b.constant+a.constant)/divisor;
-        double newY = (-a.constant+b.constant)/divisor;
+        double newX,newY;
+        if(a.infSlope){
+            newX = a.end.x;
+            newY = b.slope*a.end.x+b.constant;
+        }
+        else if(b.infSlope){
+            newX = b.end.x;
+            newY = a.slope*b.end.x+a.constant;
+        }
+        else {
+            newX = (b.constant-a.constant)/(a.slope-b.slope);
+            newY = a.slope*newX+a.constant;
+        }
         return new Point(newX, newY);
     }
 }
