@@ -7,11 +7,11 @@ public class Line {
     public double slope, constant;
     public boolean infSlope = false;
 
-    public Line(int x1, int y1, int x2, int y2) {
+    public Line(double x1, double y1, double x2, double y2) {
         update(x1, y1, x2, y2);
     }
 
-    public void update(int x1, int y1, int x2, int y2) {
+    public void update(double x1, double y1, double x2, double y2) {
         this.start = new Point(x1, y1);
         this.end = new Point(x2, y2);
         setEquation();
