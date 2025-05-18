@@ -17,7 +17,7 @@ public class MouseClickRegister implements MouseListener {
     public void mouseClicked(MouseEvent e) {
         cnt++;
         cnt%=2;
-        if(cnt==0) System.out.println("lineBorder.add(new Line("+x+", "+y+", "+e.getX()+", "+e.getY()+"));");
+        if(cnt==0) System.out.println("rewardLine.add(new Line("+x+", "+y+", "+e.getX()+", "+e.getY()+"));");
         else {
             x=e.getX();
             y=e.getY();

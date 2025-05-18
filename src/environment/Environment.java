@@ -15,12 +15,42 @@ public class Environment {
 
     Car plr;
     public ArrayList<Line> lineBorder = new ArrayList<>();
+    public ArrayList<Line> rewardLine = new ArrayList<>();
+    public int score = 0, pointer = 0;
 
     public Environment(KeyRegister kr) {
         this.kr = kr;
         this.plr = new Car(kr);
         this.bg = loadImg("res/race.png");
         setBorder();
+        setRewardLine();
+    }
+
+    public void reset() {
+        plr.reset();
+        score = 0;
+        pointer = 0;
+    }
+
+    private void setRewardLine() {
+        rewardLine.add(new Line(53, 124, 156, 151));
+        rewardLine.add(new Line(240, 29, 224, 121));
+        rewardLine.add(new Line(445, 204, 427, 329));
+        rewardLine.add(new Line(613, 126, 654, 230));
+        rewardLine.add(new Line(864, 54, 842, 158));
+        rewardLine.add(new Line(875, 240, 942, 213));
+        rewardLine.add(new Line(903, 336, 923, 407));
+        rewardLine.add(new Line(611, 410, 731, 437));
+        rewardLine.add(new Line(607, 573, 718, 545));
+        rewardLine.add(new Line(740, 662, 851, 740));
+        rewardLine.add(new Line(520, 673, 523, 743));
+        rewardLine.add(new Line(254, 654, 166, 732));
+        rewardLine.add(new Line(159, 589, 40, 611));
+        rewardLine.add(new Line(82, 428, 159, 516));
+        rewardLine.add(new Line(259, 455, 246, 543));
+        rewardLine.add(new Line(351, 491, 398, 584));
+        rewardLine.add(new Line(335, 475, 415, 367));
+        rewardLine.add(new Line(191, 415, 230, 330));
     }
 
     private void setBorder() {
@@ -163,10 +193,29 @@ public class Environment {
         return false;
     }
 
+    private boolean rewardCollected() {
+        if(rewardLine.isEmpty()) return false;
+        Line line = rewardLine.get(pointer);
+        Point intersectLeft = findIntersect(line, plr.leftLine);
+        Point intersectRight = findIntersect(line, plr.rightLine);
+        Point intersectTop = findIntersect(line, plr.topLine);
+        Point intersectBottom = findIntersect(line, plr.bottomLine);
+        if(intersectLeft!=null && line.checkBound(intersectLeft) && plr.leftLine.checkBound(intersectLeft)) return true;
+        if(intersectRight!=null && line.checkBound(intersectRight) && plr.rightLine.checkBound(intersectRight)) return true;
+        if(intersectTop!=null && line.checkBound(intersectTop) && plr.topLine.checkBound(intersectTop)) return true;
+        if(intersectBottom!=null && line.checkBound(intersectBottom) && plr.bottomLine.checkBound(intersectBottom)) return true;
+        return false;
+    }
+
     public void update() {
         plr.update();
+        if(rewardCollected()){
+            score+=10;
+            pointer = (pointer+1)%rewardLine.size();
+        }
         if(collideBorder()){
-            plr.reset();
+            score-=50;
+            reset();
         }
     }
 
