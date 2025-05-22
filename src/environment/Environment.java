@@ -181,14 +181,14 @@ public class Environment {
 
     private boolean collideBorder() {
         for(Line line:lineBorder){
-            Point intersectLeft = findIntersect(line, plr.leftLine);
-            Point intersectRight = findIntersect(line, plr.rightLine);
-            Point intersectTop = findIntersect(line, plr.topLine);
-            Point intersectBottom = findIntersect(line, plr.bottomLine);
-            if(intersectLeft!=null && line.checkBound(intersectLeft) && plr.leftLine.checkBound(intersectLeft)) return true;
-            if(intersectRight!=null && line.checkBound(intersectRight) && plr.rightLine.checkBound(intersectRight)) return true;
-            if(intersectTop!=null && line.checkBound(intersectTop) && plr.topLine.checkBound(intersectTop)) return true;
-            if(intersectBottom!=null && line.checkBound(intersectBottom) && plr.bottomLine.checkBound(intersectBottom)) return true;
+            Point intersectLeft = findIntersect(line, plr.leftHitLine);
+            Point intersectRight = findIntersect(line, plr.rightHitLine);
+            Point intersectTop = findIntersect(line, plr.topHitLine);
+            Point intersectBottom = findIntersect(line, plr.bottomHitLine);
+            if(intersectLeft!=null && line.checkBound(intersectLeft) && plr.leftHitLine.checkBound(intersectLeft)) return true;
+            if(intersectRight!=null && line.checkBound(intersectRight) && plr.rightHitLine.checkBound(intersectRight)) return true;
+            if(intersectTop!=null && line.checkBound(intersectTop) && plr.topHitLine.checkBound(intersectTop)) return true;
+            if(intersectBottom!=null && line.checkBound(intersectBottom) && plr.bottomHitLine.checkBound(intersectBottom)) return true;
         }
         return false;
     }
@@ -196,14 +196,14 @@ public class Environment {
     private boolean rewardCollected() {
         if(rewardLine.isEmpty()) return false;
         Line line = rewardLine.get(pointer);
-        Point intersectLeft = findIntersect(line, plr.leftLine);
-        Point intersectRight = findIntersect(line, plr.rightLine);
-        Point intersectTop = findIntersect(line, plr.topLine);
-        Point intersectBottom = findIntersect(line, plr.bottomLine);
-        if(intersectLeft!=null && line.checkBound(intersectLeft) && plr.leftLine.checkBound(intersectLeft)) return true;
-        if(intersectRight!=null && line.checkBound(intersectRight) && plr.rightLine.checkBound(intersectRight)) return true;
-        if(intersectTop!=null && line.checkBound(intersectTop) && plr.topLine.checkBound(intersectTop)) return true;
-        if(intersectBottom!=null && line.checkBound(intersectBottom) && plr.bottomLine.checkBound(intersectBottom)) return true;
+        Point intersectLeft = findIntersect(line, plr.leftHitLine);
+        Point intersectRight = findIntersect(line, plr.rightHitLine);
+        Point intersectTop = findIntersect(line, plr.topHitLine);
+        Point intersectBottom = findIntersect(line, plr.bottomHitLine);
+        if(intersectLeft!=null && line.checkBound(intersectLeft) && plr.leftHitLine.checkBound(intersectLeft)) return true;
+        if(intersectRight!=null && line.checkBound(intersectRight) && plr.rightHitLine.checkBound(intersectRight)) return true;
+        if(intersectTop!=null && line.checkBound(intersectTop) && plr.topHitLine.checkBound(intersectTop)) return true;
+        if(intersectBottom!=null && line.checkBound(intersectBottom) && plr.bottomHitLine.checkBound(intersectBottom)) return true;
         return false;
     }
 
