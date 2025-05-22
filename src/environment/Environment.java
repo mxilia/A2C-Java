@@ -6,8 +6,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import static util.Function.findIntersect;
-import static util.Function.loadImg;
+import static util.Function.*;
 
 public class Environment {
     KeyRegister kr;
@@ -16,12 +15,14 @@ public class Environment {
     Car plr;
     public ArrayList<Line> lineBorder = new ArrayList<>();
     public ArrayList<Line> rewardLine = new ArrayList<>();
-    public int score = 0, pointer = 0;
+    public double score = 0, inf;
+    private int pointer = 0;
 
     public Environment(KeyRegister kr) {
         this.kr = kr;
         this.plr = new Car(kr);
         this.bg = loadImg("res/race.png");
+        this.inf = Math.hypot(bg.getHeight(), bg.getWidth());
         setBorder();
         setRewardLine();
     }
@@ -207,8 +208,51 @@ public class Environment {
         return false;
     }
 
+    public double getWallDist(int dir) {
+        Line line;
+        switch(dir) {
+            case 0:
+                line = plr.forwardLine;
+                break;
+            case 1:
+                line = plr.forwardRightLine;
+                break;
+            case 2:
+                line = plr.rightLine;
+                break;
+            case 3:
+                line = plr.backRightLine;
+                break;
+            case 4:
+                line = plr.backLine;
+                break;
+            case 5:
+                line = plr.backLeftLine;
+                break;
+            case 6:
+                line = plr.leftLine;
+                break;
+            case 7:
+                line = plr.forwardLeftLine;
+                break;
+            default:
+                return inf;
+        }
+        double dist = inf;
+        double centerX = plr.x+plr.width/2.0, centerY = plr.y+plr.height/2.0;
+        Point centerCar = new Point(centerX, centerY);
+        for(Line wall:lineBorder) {
+            Point intersect = findIntersect(wall, line);
+            if(intersect == null) continue;
+            if(!line.checkBound(intersect) || !wall.checkBound(intersect)) continue;
+            dist = Math.min(dist, findDistance(intersect, centerCar));
+        }
+        return dist;
+    }
+
     public void update() {
         plr.update();
+        score-=0.1;
         if(rewardCollected()){
             score+=10;
             pointer = (pointer+1)%rewardLine.size();

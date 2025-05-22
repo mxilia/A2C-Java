@@ -38,4 +38,8 @@ public class Function {
         }
         return new Point(newX, newY);
     }
+
+    public static double findDistance(Point a, Point b) {
+        return Math.hypot(a.x-b.x, a.y-b.y);
+    }
 }
